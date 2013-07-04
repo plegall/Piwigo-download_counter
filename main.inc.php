@@ -115,4 +115,21 @@ function dlcount_picture_prefilter($content, &$smarty)
 
   return $content;
 }
+
+/**
+ * increase counter of each photo inside a batch download
+ */
+add_event_handler('batchdownload_end_zip', 'dlcount_batchdownload', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
+function dlcount_batchdownload($data, $images)
+{
+  if (count($images) > 0)
+  {
+    $query = '
+UPDATE '.IMAGES_TABLE.'
+  SET download_counter = download_counter + 1
+  WHERE id IN ('.implode(',', $images).')
+;';
+    pwg_query($query);
+  }
+}
 ?>
