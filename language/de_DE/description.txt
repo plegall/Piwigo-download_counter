@@ -1,0 +1,1 @@
+Zählt und zeigt an, wie oft ein Bild heruntergeladen wurde.
