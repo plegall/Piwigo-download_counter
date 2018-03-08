@@ -79,6 +79,7 @@ WHERE id = "'. DLCOUNT_ID .'"';
     $query = '
 UPDATE '.IMAGES_TABLE.'
   SET download_counter = download_counter + 1
+    , lastmodified = lastmodified
   WHERE id = '.$_GET['id'].'
 ;';
     pwg_query($query);
@@ -127,6 +128,7 @@ function dlcount_batchdownload($data, $images)
     $query = '
 UPDATE '.IMAGES_TABLE.'
   SET download_counter = download_counter + 1
+    , lastmodified = lastmodified
   WHERE id IN ('.implode(',', $images).')
 ;';
     pwg_query($query);
